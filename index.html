@@ -386,46 +386,44 @@
 
   <p class="section-label">Por onde começar</p>
 
-  <!-- fluxo visual: etapa 1 → etapa 2 → kickoff -->
-  <div style="display:flex;align-items:stretch;gap:0;">
-
-    <a href="etapa1.html" class="etapa-card" style="flex:1;">
+  <!-- fluxo: etapa 1 e 2 lado a lado, depois kickoff em destaque -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:16px;">
+    <a href="etapa1.html" class="etapa-card">
       <div class="etapa-num">1</div>
       <h3>Criar acessos de usuário</h3>
       <p>Crie os acessos em cada marketplace que será operado, utilizando os e-mails e manuais disponibilizados pela equipe Koncili.</p>
       <div class="etapa-cta">Acessar manuais →</div>
     </a>
-
-    <div style="display:flex;align-items:center;padding:0 4px;flex-shrink:0;">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="14" cy="14" r="13" fill="#e8f7e8" stroke="#3aaa35" stroke-width="1.5"/>
-        <path d="M10 14h8M15 11l3 3-3 3" stroke="#3aaa35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-
-    <a href="etapa2.html" class="etapa-card" style="flex:1;">
+    <a href="etapa2.html" class="etapa-card">
       <div class="etapa-num">2</div>
       <h3>Integrar no painel Koncili</h3>
       <p>Integre as contas que serão operadas diretamente no painel da Koncili, utilizando o acesso fornecido pela equipe de implantação.</p>
       <div class="etapa-cta">Acessar integração →</div>
     </a>
-
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 4px;flex-shrink:0;gap:4px;">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="14" cy="14" r="13" fill="#e0f7f7" stroke="#00b1b1" stroke-width="1.5"/>
-        <path d="M10 14h8M15 11l3 3-3 3" stroke="#00b1b1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span style="font-size:9px;font-weight:700;color:#00b1b1;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;">Após etapas 1 e 2</span>
-    </div>
-
-    <a href="kickoff.html" class="etapa-card" style="flex:1;border-color:#00b1b1;">
-      <div class="etapa-num" style="background:#00b1b1;">🎯</div>
-      <h3 style="color:#00b1b1;">Reunião de Kickoff</h3>
-      <p>Agendamos o kickoff após a conclusão das etapas 1 e 2. Conheça o que esperar da reunião e do processo de onboarding.</p>
-      <div class="etapa-cta" style="background:#00b1b1;">Ver apresentação →</div>
-    </a>
-
   </div>
+
+  <!-- separador com indicação visual -->
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+    <div style="flex:1;height:1.5px;background:linear-gradient(to right,#e8e8e8,#3aaa35);"></div>
+    <div style="display:flex;align-items:center;gap:8px;background:#e8f7e8;border:1.5px solid #3aaa35;border-radius:20px;padding:5px 14px;">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M7 13l-3-3M7 13l3-3" stroke="#3aaa35" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span style="font-size:11px;font-weight:700;color:#3aaa35;letter-spacing:.06em;text-transform:uppercase;">Após concluir as etapas 1 e 2</span>
+    </div>
+    <div style="flex:1;height:1.5px;background:linear-gradient(to left,#e8e8e8,#3aaa35);"></div>
+  </div>
+
+  <!-- kickoff em destaque -->
+  <a href="kickoff.html" style="display:flex;align-items:center;justify-content:space-between;gap:24px;background:var(--navy);border-radius:12px;padding:28px 32px;text-decoration:none;transition:opacity .2s;flex-wrap:wrap;" onmouseover="this.style.opacity='.92'" onmouseout="this.style.opacity='1'">
+    <div style="display:flex;align-items:center;gap:20px;">
+      <div style="width:48px;height:48px;border-radius:12px;background:#3aaa35;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🎯</div>
+      <div>
+        <p style="font-size:11px;font-weight:700;color:#74e635;text-transform:uppercase;letter-spacing:.1em;margin:0 0 4px;">Etapa final</p>
+        <h3 style="font-size:18px;font-weight:800;color:#fff;margin:0 0 4px;">Reunião de Kickoff</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,.65);margin:0;">Agendada pela equipe Koncili após a conclusão das integrações.</p>
+      </div>
+    </div>
+    <div style="background:#3aaa35;color:#fff;font-size:13px;font-weight:700;padding:12px 24px;border-radius:8px;white-space:nowrap;flex-shrink:0;">Ver apresentação →</div>
+  </a>
 
   <!-- TIMELINE -->
   <div class="timeline-wrap">

@@ -259,6 +259,51 @@
     }
     .tl-tag.teal { background: #e0f7f7; color: var(--teal); }
 
+    /* ── EQUIPE ── */
+    .equipe-wrap {
+      margin-top: 56px;
+    }
+    .equipe-wrap h2 {
+      font-size: 22px; font-weight: 800; color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .equipe-wrap h2 span { color: var(--green); }
+    .equipe-wrap .equipe-desc {
+      font-size: 13px; color: var(--gray-mid); margin-bottom: 28px; max-width: 560px;
+    }
+    .equipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .membro-card {
+      background: var(--white);
+      border: 1.5px solid #e8e8e8;
+      border-radius: 12px;
+      padding: 22px 20px;
+      display: flex; flex-direction: column; gap: 6px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .membro-card:hover {
+      box-shadow: 0 4px 18px rgba(58,170,53,0.12);
+      border-color: var(--green);
+    }
+    .membro-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800; color: var(--green);
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+    .membro-nome { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .membro-cargo { font-size: 11.5px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; }
+    .membro-email {
+      font-size: 11.5px; color: var(--gray-mid);
+      margin-top: 4px;
+      word-break: break-all;
+    }
+
     /* ── HELP ── */
     .help-bar {
       margin-top: 48px;
@@ -408,6 +453,43 @@
           <p>Ao final do onboarding, realizamos uma pesquisa de satisfação sobre o atendimento da área.</p>
           <span class="tl-tag teal">Pós onboarding</span>
         </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EQUIPE -->
+  <div class="equipe-wrap">
+    <h2>Sua equipe <span>dedicada</span></h2>
+    <p class="equipe-desc">A partir deste momento, sua operação conta com profissionais especializados em marketplaces, comprometidos com a integridade da sua operação financeira.</p>
+    <div class="equipe-grid">
+
+      <div class="membro-card">
+        <div class="membro-avatar">LO</div>
+        <div class="membro-nome">Leonardo de Oliveira Almeida</div>
+        <div class="membro-cargo">Gerente · Central de Serviços</div>
+        <div class="membro-email">leonardo.oliveira@db1.com.br</div>
+      </div>
+
+      <div class="membro-card">
+        <div class="membro-avatar">RG</div>
+        <div class="membro-nome">Romulo Gomes</div>
+        <div class="membro-cargo">Coordenador · Koncili Service</div>
+        <div class="membro-email">romulo.gomes@db1.com.br</div>
+      </div>
+
+      <div class="membro-card">
+        <div class="membro-avatar">JP</div>
+        <div class="membro-nome">Jhonatan Pereira</div>
+        <div class="membro-cargo">Analista de Onboarding</div>
+        <div class="membro-email">jhonatan.pereira@db1.com.br</div>
+      </div>
+
+      <div class="membro-card">
+        <div class="membro-avatar">JP</div>
+        <div class="membro-nome">Jessica Pentiado</div>
+        <div class="membro-cargo">Analista de Onboarding</div>
+        <div class="membro-email">jessica.pentiado@db1.com.br</div>
       </div>
 
     </div>

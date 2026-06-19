@@ -152,6 +152,19 @@
   .slide-header.green .brand,.slide-header.green .page{color:rgba(255,255,255,.5);}
   .slide-header.mint .brand,.slide-header.mint .page{color:rgba(21,49,55,.4);}
 
+
+  /* ── Slide 11 – equipe dedicada ── */
+  .s11{background:#e0f5ef;padding:7% 8%;flex-direction:column;}
+  .s11 .supertitle{font-size:clamp(.6rem,1vw,.75rem);font-weight:700;color:#3aaa35;letter-spacing:.15em;text-transform:uppercase;margin-bottom:2%;}
+  .s11 h2{font-size:clamp(1.4rem,3.2vw,2.2rem);font-weight:900;color:#153137;margin-bottom:2%;}
+  .s11 .equipe-desc{font-size:clamp(.58rem,1vw,.72rem);color:#3c3c3b;margin-bottom:4%;max-width:70%;}
+  .s11 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3%;flex:1;align-content:start;}
+  .s11-card{background:#153137;border-radius:10px;padding:5% 4%;display:flex;flex-direction:column;gap:7px;}
+  .s11-card .av{width:clamp(30px,4.5vw,42px);height:clamp(30px,4.5vw,42px);border-radius:50%;background:#3aaa35;display:flex;align-items:center;justify-content:center;font-size:clamp(.65rem,1.2vw,.85rem);font-weight:900;color:#fff;margin-bottom:4px;}
+  .s11-card .nome{font-size:clamp(.6rem,1.1vw,.78rem);font-weight:700;color:#fff;line-height:1.3;}
+  .s11-card .cargo{font-size:clamp(.5rem,.9vw,.64rem);font-weight:600;color:#74e635;text-transform:uppercase;letter-spacing:.06em;}
+  .s11-card .email{font-size:clamp(.46rem,.82vw,.6rem);color:rgba(255,255,255,.6);margin-top:4px;word-break:break-all;}
+
   /* util */
   .flex-col{display:flex;flex-direction:column;}
 </style>
@@ -387,6 +400,44 @@
       </div>
     </div>
 
+
+    <!-- ═══ SLIDE 11 ═══ Equipe dedicada -->
+    <div class="slide" id="s11">
+      <div class="slide-inner s11 flex-col">
+        <div class="slide-header mint"><span class="brand">«KONCILI · ONBOARDING</span><span class="page">11</span></div>
+        <div style="margin-top:5%;"></div>
+        <p class="supertitle">Seu time</p>
+        <h2>Especialistas dedicados<br/>à sua operação</h2>
+        <p class="equipe-desc">A partir deste momento, sua operação conta com profissionais comprometidos com a integridade da sua operação financeira.</p>
+        <div class="team-grid">
+          <div class="s11-card">
+            <div class="av">LO</div>
+            <div class="nome">Leonardo de Oliveira Almeida</div>
+            <div class="cargo">Gerente · Central de Serviços</div>
+            <div class="email">leonardo.oliveira@db1.com.br</div>
+          </div>
+          <div class="s11-card">
+            <div class="av">RG</div>
+            <div class="nome">Romulo Gomes</div>
+            <div class="cargo">Coordenador · Koncili Service</div>
+            <div class="email">romulo.gomes@db1.com.br</div>
+          </div>
+          <div class="s11-card">
+            <div class="av">JP</div>
+            <div class="nome">Jhonatan Pereira</div>
+            <div class="cargo">Analista de Onboarding</div>
+            <div class="email">jhonatan.pereira@db1.com.br</div>
+          </div>
+          <div class="s11-card">
+            <div class="av">JP</div>
+            <div class="nome">Jessica Pentiado</div>
+            <div class="cargo">Analista de Onboarding</div>
+            <div class="email">jessica.pentiado@db1.com.br</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div><!-- /stage -->
 
   <!-- dots -->
@@ -401,6 +452,7 @@
     <div class="dot" onclick="goTo(7)"></div>
     <div class="dot" onclick="goTo(8)"></div>
     <div class="dot" onclick="goTo(9)"></div>
+    <div class="dot" onclick="goTo(10)"></div>
   </div>
 </div>
 

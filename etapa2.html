@@ -99,37 +99,62 @@
     }
     .access-btn:hover { background: #2d8f29; }
 
-    /* MANUAIS EM BREVE */
+    /* MANUAIS */
     .section-label {
       font-size: 11px; font-weight: 700; letter-spacing: 2px;
       text-transform: uppercase; color: var(--gray-mid); margin-bottom: 20px;
     }
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 14px;
     }
+
+    /* Card com manual disponível */
+    .manual-card {
+      background: white; border: 1.5px solid #e8e8e8;
+      border-radius: 10px; padding: 16px;
+      display: flex; align-items: center; gap: 12px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .manual-card:hover { border-color: var(--green); box-shadow: 0 4px 12px rgba(58,170,53,0.1); }
+    .manual-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800; color: white; flex-shrink: 0;
+    }
+    .manual-info { flex: 1; min-width: 0; }
+    .manual-info h4 { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .manual-btns { display: flex; gap: 6px; }
+    .btn-view {
+      background: var(--navy); color: white; font-size: 10px; font-weight: 700;
+      padding: 4px 10px; border-radius: 5px; text-decoration: none;
+      white-space: nowrap; transition: background 0.15s;
+    }
+    .btn-view:hover { background: var(--green); }
+    .btn-dl {
+      background: var(--bg); color: var(--gray-dark); font-size: 12px; font-weight: 700;
+      padding: 4px 8px; border-radius: 5px; text-decoration: none;
+      border: 1px solid #e0e0e0; transition: background 0.15s;
+    }
+    .btn-dl:hover { background: #e0e0e0; }
+
+    /* Card em breve */
     .soon-card {
       background: var(--bg); border: 2px dashed #d8d8d8;
-      border-radius: 10px; padding: 20px 14px;
-      text-align: center; display: flex;
-      flex-direction: column; align-items: center; gap: 10px;
+      border-radius: 10px; padding: 16px;
+      display: flex; align-items: center; gap: 12px;
     }
-    .soon-logo {
-      width: 52px; height: 36px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .soon-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
     .soon-placeholder {
-      width: 52px; height: 36px; background: #e8e8e8;
-      border-radius: 6px; display: flex; align-items: center;
-      justify-content: center; font-weight: 800; font-size: 13px; color: var(--gray-mid);
+      width: 40px; height: 40px; background: #e8e8e8;
+      border-radius: 8px; display: flex; align-items: center;
+      justify-content: center; font-weight: 800; font-size: 12px; color: var(--gray-mid); flex-shrink: 0;
     }
-    .soon-card h4 { font-size: 12px; font-weight: 700; color: var(--gray-dark); }
+    .soon-card h4 { font-size: 12px; font-weight: 700; color: var(--gray-dark); margin-bottom: 4px; }
     .soon-tag {
-      background: white; border: 1px solid #d8d8d8;
+      display: inline-block; background: white; border: 1px solid #d8d8d8;
       color: var(--gray-mid); font-size: 10px; font-weight: 700;
-      padding: 3px 8px; border-radius: 4px;
+      padding: 2px 7px; border-radius: 4px;
     }
 
     /* HELP */
@@ -211,48 +236,98 @@
   <p class="section-label">Manuais de integração por canal</p>
   <div class="cards-grid">
 
-    <div class="soon-card">
-      <div class="soon-logo">
-        <img src="logo_madeira_madeira.png" alt="Madeira Madeira"
-             onerror="this.parentElement.innerHTML='<div class=\'soon-placeholder\'>MM</div>'"/>
+    <div class="manual-card">
+      <div class="manual-icon" style="background:#ff9900;">A</div>
+      <div class="manual-info">
+        <h4>Amazon</h4>
+        <div class="manual-btns">
+          <a href="https://docs.google.com/viewer?url=https://jessicapentiado.github.io/manuais-koncili/integracao-amazon.pdf&embedded=true" target="_blank" class="btn-view">Ver manual</a>
+          <a href="integracao-amazon.pdf" download class="btn-dl">↓</a>
+        </div>
       </div>
+    </div>
+
+    <div class="manual-card">
+      <div class="manual-icon" style="background:#e8001e;">C</div>
+      <div class="manual-info">
+        <h4>Casas Bahia</h4>
+        <div class="manual-btns">
+          <a href="https://docs.google.com/viewer?url=https://jessicapentiado.github.io/manuais-koncili/integracao-casas-bahia.pdf&embedded=true" target="_blank" class="btn-view">Ver manual</a>
+          <a href="integracao-casas-bahia.pdf" download class="btn-dl">↓</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="manual-card">
+      <div class="manual-icon" style="background:#6600cc;">D</div>
+      <div class="manual-info">
+        <h4>Dafiti</h4>
+        <div class="manual-btns">
+          <a href="https://docs.google.com/viewer?url=https://jessicapentiado.github.io/manuais-koncili/integracao-dafiti.pdf&embedded=true" target="_blank" class="btn-view">Ver manual</a>
+          <a href="integracao-dafiti.pdf" download class="btn-dl">↓</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="manual-card">
+      <div class="manual-icon" style="background:#0086ff;">M</div>
+      <div class="manual-info">
+        <h4>Magazine Luiza</h4>
+        <div class="manual-btns">
+          <a href="https://docs.google.com/viewer?url=https://jessicapentiado.github.io/manuais-koncili/integracao-magalu.pdf&embedded=true" target="_blank" class="btn-view">Ver manual</a>
+          <a href="integracao-magalu.pdf" download class="btn-dl">↓</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="manual-card">
+      <div class="manual-icon" style="background:#ffe600;color:#333;">ML</div>
+      <div class="manual-info">
+        <h4>Mercado Livre</h4>
+        <div class="manual-btns">
+          <a href="https://docs.google.com/viewer?url=https://jessicapentiado.github.io/manuais-koncili/integracao-mercado-livre.pdf&embedded=true" target="_blank" class="btn-view">Ver manual</a>
+          <a href="integracao-mercado-livre.pdf" download class="btn-dl">↓</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="manual-card">
+      <div class="manual-icon" style="background:#ee4d2d;">S</div>
+      <div class="manual-info">
+        <h4>Shopee</h4>
+        <div class="manual-btns">
+          <a href="https://docs.google.com/viewer?url=https://jessicapentiado.github.io/manuais-koncili/integracao-shopee.pdf&embedded=true" target="_blank" class="btn-view">Ver manual</a>
+          <a href="integracao-shopee.pdf" download class="btn-dl">↓</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="manual-card">
+      <div class="manual-icon" style="background:#010101;">TK</div>
+      <div class="manual-info">
+        <h4>TikTok Shop</h4>
+        <div class="manual-btns">
+          <a href="https://docs.google.com/viewer?url=https://jessicapentiado.github.io/manuais-koncili/integracao-tiktok.pdf&embedded=true" target="_blank" class="btn-view">Ver manual</a>
+          <a href="integracao-tiktok.pdf" download class="btn-dl">↓</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="soon-card">
+      <div class="soon-placeholder">MM</div>
       <h4>Madeira Madeira</h4>
       <span class="soon-tag">Em breve</span>
     </div>
 
     <div class="soon-card">
-      <div class="soon-logo">
-        <img src="logo_tiktok.png" alt="TikTok Shop"
-             onerror="this.parentElement.innerHTML='<div class=\'soon-placeholder\'>TT</div>'"/>
-      </div>
-      <h4>TikTok Shop</h4>
-      <span class="soon-tag">Em breve</span>
-    </div>
-
-    <div class="soon-card">
-      <div class="soon-logo">
-        <img src="logo_americanas.png" alt="Americanas"
-             onerror="this.parentElement.innerHTML='<div class=\'soon-placeholder\'>AM</div>'"/>
-      </div>
+      <div class="soon-placeholder">AM</div>
       <h4>Americanas</h4>
       <span class="soon-tag">Em breve</span>
     </div>
 
     <div class="soon-card">
-      <div class="soon-logo">
-        <img src="logo_carrefour.png" alt="Carrefour"
-             onerror="this.parentElement.innerHTML='<div class=\'soon-placeholder\'>CR</div>'"/>
-      </div>
+      <div class="soon-placeholder">CR</div>
       <h4>Carrefour</h4>
-      <span class="soon-tag">Em breve</span>
-    </div>
-
-    <div class="soon-card">
-      <div class="soon-logo">
-        <img src="logo_casas_bahia.png" alt="Casas Bahia"
-             onerror="this.parentElement.innerHTML='<div class=\'soon-placeholder\'>CB</div>'"/>
-      </div>
-      <h4>Casas Bahia</h4>
       <span class="soon-tag">Em breve</span>
     </div>
 

@@ -106,7 +106,7 @@
     }
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 14px;
     }
 
@@ -149,10 +149,14 @@
       border-radius: 10px; padding: 16px;
       display: flex; align-items: center; gap: 12px;
     }
-    .soon-placeholder {
-      width: 40px; height: 40px; background: #e8e8e8;
-      border-radius: 8px; display: flex; align-items: center;
-      justify-content: center; font-weight: 800; font-size: 12px; color: var(--gray-mid); flex-shrink: 0;
+    .soon-icon {
+      width: 72px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .soon-icon img {
+      max-width: 100%; max-height: 100%;
+      object-fit: contain;
     }
     .soon-card h4 { font-size: 12px; font-weight: 700; color: var(--gray-dark); margin-bottom: 4px; }
     .soon-tag {
@@ -189,6 +193,13 @@
   </style>
 </head>
 <body>
+
+<script>
+function logoFallback(el, text, bg, color) {
+  var fs = text.length > 2 ? '11' : text.length === 2 ? '13' : '18';
+  el.parentNode.innerHTML = '<span style="width:72px;height:48px;background:' + bg + ';border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:' + fs + 'px;color:' + color + ';font-family:Montserrat,Arial,sans-serif;letter-spacing:0.5px;">' + text + '</span>';
+}
+</script>
 
 <header>
   <a href="index.html" class="back-btn">← Voltar</a>
@@ -240,8 +251,12 @@
   <p class="section-label">Manuais de integração por canal</p>
   <div class="cards-grid">
 
+    <!-- Amazon -->
     <div class="manual-card">
-      <div class="manual-icon"><img src="logo-amazon.png" alt="A"/></div>
+      <div class="manual-icon">
+        <img src="logo-amazon.png" alt="Amazon"
+          onerror="logoFallback(this,'a','#FF9900','white')"/>
+      </div>
       <div class="manual-info">
         <h4>Amazon</h4>
         <div class="manual-btns">
@@ -251,8 +266,12 @@
       </div>
     </div>
 
+    <!-- Casas Bahia -->
     <div class="manual-card">
-      <div class="manual-icon"><img src="logo-casas-bahia.png" alt="C"/></div>
+      <div class="manual-icon">
+        <img src="logo-casas-bahia.png" alt="Casas Bahia"
+          onerror="logoFallback(this,'CB','#006DCC','white')"/>
+      </div>
       <div class="manual-info">
         <h4>Casas Bahia</h4>
         <div class="manual-btns">
@@ -262,8 +281,12 @@
       </div>
     </div>
 
+    <!-- Dafiti -->
     <div class="manual-card">
-      <div class="manual-icon"><img src="logo-dafiti.png" alt="D"/></div>
+      <div class="manual-icon">
+        <img src="logo-dafiti.png" alt="Dafiti"
+          onerror="logoFallback(this,'D','#1a1a1a','white')"/>
+      </div>
       <div class="manual-info">
         <h4>Dafiti</h4>
         <div class="manual-btns">
@@ -273,8 +296,12 @@
       </div>
     </div>
 
+    <!-- Magazine Luiza -->
     <div class="manual-card">
-      <div class="manual-icon"><img src="logo-magalu.png" alt="M"/></div>
+      <div class="manual-icon">
+        <img src="logo-magalu.png" alt="Magazine Luiza"
+          onerror="logoFallback(this,'M','#DC0028','white')"/>
+      </div>
       <div class="manual-info">
         <h4>Magazine Luiza</h4>
         <div class="manual-btns">
@@ -284,8 +311,12 @@
       </div>
     </div>
 
+    <!-- Mercado Livre -->
     <div class="manual-card">
-      <div class="manual-icon"><img src="logo-mercado-livre.png" alt="ML"/></div>
+      <div class="manual-icon">
+        <img src="logo-mercado-livre.png" alt="Mercado Livre"
+          onerror="logoFallback(this,'ML','#FFE600','#2D3277')"/>
+      </div>
       <div class="manual-info">
         <h4>Mercado Livre</h4>
         <div class="manual-btns">
@@ -295,8 +326,12 @@
       </div>
     </div>
 
+    <!-- Shopee -->
     <div class="manual-card">
-      <div class="manual-icon"><img src="logo-shopee.png" alt="S"/></div>
+      <div class="manual-icon">
+        <img src="logo-shopee.png" alt="Shopee"
+          onerror="logoFallback(this,'S','#EE4D2D','white')"/>
+      </div>
       <div class="manual-info">
         <h4>Shopee</h4>
         <div class="manual-btns">
@@ -306,9 +341,75 @@
       </div>
     </div>
 
+    <!-- TikTok Shop -->
     <div class="manual-card">
-      <div class="manual-icon"><img src="logo-tiktok.png" alt="TK"/></div>
+      <div class="manual-icon">
+        <img src="logo-tiktok.png" alt="TikTok Shop"
+          onerror="logoFallback(this,'TT','#000000','white')"/>
+      </div>
       <div class="manual-info">
         <h4>TikTok Shop</h4>
         <div class="manual-btns">
-          <a href="https://docs.google.com/viewer?url=https://jessicapentiado.github.io/manuais-ko
+          <a href="https://docs.google.com/viewer?url=https://jessicapentiado.github.io/manuais-koncili/integracao-tiktok.pdf&embedded=true" target="_blank" class="btn-view">Ver manual</a>
+          <a href="integracao-tiktok.pdf" download class="btn-dl">↓</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Madeira Madeira — Em breve -->
+    <div class="soon-card">
+      <div class="soon-icon">
+        <img src="logo-madeira-madeira.png" alt="Madeira Madeira"
+          onerror="logoFallback(this,'MM','#E85D04','white')"/>
+      </div>
+      <div>
+        <h4>Madeira Madeira</h4>
+        <span class="soon-tag">Em breve</span>
+      </div>
+    </div>
+
+    <!-- Americanas — Em breve -->
+    <div class="soon-card">
+      <div class="soon-icon">
+        <img src="logo-americanas.png" alt="Americanas"
+          onerror="logoFallback(this,'A','#CC0000','white')"/>
+      </div>
+      <div>
+        <h4>Americanas</h4>
+        <span class="soon-tag">Em breve</span>
+      </div>
+    </div>
+
+    <!-- Carrefour — Em breve -->
+    <div class="soon-card">
+      <div class="soon-icon">
+        <img src="logo-carrefour.png" alt="Carrefour"
+          onerror="logoFallback(this,'C','#003DA5','white')"/>
+      </div>
+      <div>
+        <h4>Carrefour</h4>
+        <span class="soon-tag">Em breve</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="help-bar">
+    <div>
+      <h3>Precisa de ajuda?</h3>
+      <p>Fale com sua analista de implantação pelo WhatsApp.</p>
+    </div>
+    <a href="https://wa.me/5544999999999" target="_blank" class="wa-btn">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+
+</main>
+
+<a href="https://wa.me/5544999999999" target="_blank" class="float-wa" title="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+</body>
+</html>

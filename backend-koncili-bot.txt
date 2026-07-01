@@ -1,0 +1,183 @@
+/**
+ * backend-koncili-bot.js
+ * Bot de Ajuda Koncili — Backend Node.js
+ *
+ * Dependências: npm install express cors @anthropic-ai/sdk pg uuid dotenv
+ * Variáveis de ambiente (.env):
+ *   ANTHROPIC_API_KEY=sk-ant-...
+ *   DATABASE_URL=postgres://user:pass@host:5432/db   (opcional)
+ *   PORT=3000
+ */
+
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const Anthropic = require('@anthropic-ai/sdk');
+const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
+const path = require('path');
+
+const app = express();
+app.use(cors());
+app.use(express.json({ limit: '10mb' })); // limite para aceitar imagens em base64
+
+// ── Anthropic client ──────────────────────────────────────────────────────────
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+// ── System prompt ─────────────────────────────────────────────────────────────
+// Carrega do arquivo (mantenha system-prompt-portal.md na mesma pasta)
+function loadSystemPrompt() {
+  const promptPath = path.join(__dirname, 'system-prompt-portal.md');
+  if (fs.existsSync(promptPath)) {
+    const raw = fs.readFileSync(promptPath, 'utf-8');
+    // Extrai apenas o conteúdo entre "## SYSTEM PROMPT" e "## Exemplo de chamada"
+    const match = raw.match(/## SYSTEM PROMPT \(copiar a partir daqui\)([\s\S]*?)## Exemplo de chamada/);
+    return match ? match[1].trim() : raw;
+  }
+  return 'Você é o assistente de suporte da Koncili. Ajude sellers a criar acessos nos marketplaces.';
+}
+
+let SYSTEM_PROMPT = loadSystemPrompt();
+
+// ── Armazenamento em memória (substitua por banco real em produção) ────────────
+// Para usar Postgres, descomente o bloco pg abaixo.
+const qaLog = []; // [ { id, sessionId, marketplace, question, answer, confirmed, createdAt } ]
+
+// -- Postgres (opcional) -------------------------------------------------------
+// const { Pool } = require('pg');
+// const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+// async function createTable() {
+//   await pool.query(`
+//     CREATE TABLE IF NOT EXISTS qa_log (
+//       id SERIAL PRIMARY KEY,
+//       session_id TEXT,
+//       marketplace TEXT,
+//       question TEXT,
+//       answer TEXT,
+//       confirmed BOOLEAN DEFAULT NULL,
+//       created_at TIMESTAMP DEFAULT NOW()
+//     );
+//   `);
+// }
+// createTable();
+// ------------------------------------------------------------------------------
+
+// ── Sessões em memória (histórico de conversa) ────────────────────────────────
+const sessions = {}; // { sessionId: [ {role, content}, ... ] }
+
+function getSession(sessionId) {
+  if (!sessions[sessionId]) sessions[sessionId] = [];
+  return sessions[sessionId];
+}
+
+// ── POST /chat ────────────────────────────────────────────────────────────────
+/**
+ * Body: {
+ *   sessionId: string (opcional — gerado se não informado),
+ *   message: string,
+ *   imageBase64: string | null  (base64 da imagem, sem prefixo data:...)
+ *   imageMime: string | null    ('image/png' | 'image/jpeg' | 'image/webp')
+ * }
+ * Response: { sessionId, answer, logId }
+ */
+app.post('/chat', async (req, res) => {
+  const { message, imageBase64, imageMime } = req.body;
+  const sessionId = req.body.sessionId || uuidv4();
+  const history = getSession(sessionId);
+
+  // Monta o conteúdo da mensagem do usuário
+  let userContent;
+  if (imageBase64) {
+    userContent = [
+      {
+        type: 'image',
+        source: { type: 'base64', media_type: imageMime || 'image/png', data: imageBase64 }
+      },
+      { type: 'text', text: message || 'O que está errado nessa tela?' }
+    ];
+  } else {
+    userContent = message;
+  }
+
+  history.push({ role: 'user', content: userContent });
+
+  try {
+    const response = await anthropic.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1024,
+      system: SYSTEM_PROMPT,
+      messages: history
+    });
+
+    const answer = response.content[0].text;
+    history.push({ role: 'assistant', content: answer });
+
+    // Detecta marketplace mencionado (simples heurística)
+    const marketplaces = ['amazon', 'mercado livre', 'shopee', 'magalu', 'magazine luiza',
+      'kabum', 'leroy merlin', 'madeira madeira', 'tiktok', 'americanas', 'carrefour', 'casas bahia'];
+    const text = (message || '').toLowerCase();
+    const marketplace = marketplaces.find(m => text.includes(m)) || null;
+
+    // Salva no log
+    const logId = uuidv4();
+    const logEntry = {
+      id: logId,
+      sessionId,
+      marketplace,
+      question: message,
+      answer,
+      confirmed: null,
+      createdAt: new Date()
+    };
+    qaLog.push(logEntry);
+
+    // -- Postgres (opcional) ---------------------------------------------------
+    // await pool.query(
+    //   'INSERT INTO qa_log(id, session_id, marketplace, question, answer) VALUES($1,$2,$3,$4,$5)',
+    //   [logId, sessionId, marketplace, message, answer]
+    // );
+    // --------------------------------------------------------------------------
+
+    res.json({ sessionId, answer, logId });
+
+  } catch (err) {
+    console.error('Erro Anthropic:', err);
+    res.status(500).json({ error: 'Erro ao processar a mensagem. Tente novamente.' });
+  }
+});
+
+// ── POST /feedback ────────────────────────────────────────────────────────────
+/**
+ * Body: { logId: string, confirmed: boolean }
+ */
+app.post('/feedback', async (req, res) => {
+  const { logId, confirmed } = req.body;
+
+  const entry = qaLog.find(e => e.id === logId);
+  if (entry) {
+    entry.confirmed = confirmed;
+  }
+
+  // -- Postgres (opcional) ---------------------------------------------------
+  // await pool.query('UPDATE qa_log SET confirmed=$1 WHERE id=$2', [confirmed, logId]);
+  // --------------------------------------------------------------------------
+
+  res.json({ ok: true });
+});
+
+// ── GET /health ───────────────────────────────────────────────────────────────
+app.get('/health', (req, res) => res.json({ status: 'ok', logs: qaLog.length }));
+
+// ── Utilitário: exportar Q&As confirmadas p/ enriquecer system prompt ─────────
+app.get('/admin/confirmed-qa', (req, res) => {
+  const confirmed = qaLog.filter(e => e.confirmed === true);
+  const formatted = confirmed.map(e => `P: ${e.question}\nR: ${e.answer}`).join('\n\n---\n\n');
+  res.type('text/plain').send(formatted || 'Nenhuma Q&A confirmada ainda.');
+});
+
+// ── Inicialização ─────────────────────────────────────────────────────────────
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Bot Koncili rodando na porta ${PORT}`);
+  console.log(`System prompt carregado: ${SYSTEM_PROMPT.length} caracteres`);
+});
